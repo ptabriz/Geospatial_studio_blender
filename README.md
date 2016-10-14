@@ -1,27 +1,18 @@
 # The Geospatial_studio 
-
+**NOTE: This tutorial provides basic steps for importing and processing Geospatial data in Blender using BlenderGIS Addon. For comprehensive review of the features and manual of the addon please visit [domlysz/BlenderGIS repository](https://github.com/domlysz/BlenderGIS). 
 ## Pre-requisites
-
 1. Blender  [Latest Build](https://www.blender.org/download/)
 2. BlenderGIS [Add-on](https://github.com/domlysz/BlenderGIS) 
 3. [GRASS GIS](https://grass.osgeo.org/download/) or ARCGIS
-4. Laptop with Windows 7 or higher, Mac OS X or Linux
+4. [Download](./sample/) sample data folder
+5. Laptop with Windows 7 or higher, Mac OS X or Linux
 
-## Preparing data
-
-### Exporting Geospatial-dataset from Grass GIS (optional) ###
-*Note: for complete tutorial on importing different data-types such as Lidar Vectors and   
-1. Open GRASS GIS Exporting Rasters * note 
-2. In Arduino IDE, go to **sketch** > **Include Library** > **Manage Library**, search for **TheThingsNetwork** and install the TheThingsNetwork's Arduino library.
-3. Connect the The Things Uno to your computer using the Micro-USB cable
-4. Select **Tools** > **Board** > **Arduino Leonardo**
-5. Select **Tools** > **Port** > the port that identifies as **Arduino Leonardo**. For example, on Mac OS X:
-   ![arduino-port](./media/arduino-port.png)
-   On Windows, in **Control Panel**, open the **Device Manager** to see which COM port you should use.
-
-### The Things Network Dashboard
-
-Your applications and devices can be managed by [The Things Network Dashboard][dashboard].
+## Preparing Geospatial data in GRASS GIS (optional)
+*Note: for comprehensive tutorial on importing different data-types (e.g., Lidar, vectors and rasters) using GRASS GIS and ARCGIS see [Geospatial Modelling Module](http://ncsu-geoforall-lab.github.io/geospatial-modeling-course/grass/terrain_modeling.html)   
+#### Exporting Raster
+1. Open GRASS GIS
+2. Convert rasters to Geotiff files with world files <br> 
+For Blender GIS addon to import rasters you need either tagged Geotiffs or Geotiffs with world files (.tfw) 
 
 #### Create an Account
 
