@@ -30,7 +30,6 @@ Example for buildings vector:
 `v.out.ogr input=Buidlings@Dix_10_12 output=D:\Geospatial_studio\Buildings format=ESRI_Shapefile`
 
 ----------
-__Exporting Textures__
 
 ###1. Preparing Blender scene 
 
@@ -58,14 +57,53 @@ __Exporting Textures__
 If you cannot find the GIS tab, then check if the add-on is properly installed and activated in blender preferences (step 1.1. )
 *  In the second section of the panel , __Geoscene__, click on the Gear shaped icon . You should be able to find and select the 'NAD83(HARN)/North Carolina' preset. After selecting it click on the __√__ icon to set it as scene coordinate system.
 
+----------
 ###2. Importing Geospatial datasets
 ####2. 1. rasters
 Rasters can be imported and used in different ways. You can import them _As DEM_ to use it as a 3D surface or as_Raw DEM_  to be triangulated or skinned inside Blender. You can select _On Mesh_ to drape them as a texture on your 3D meshes. In this example, we import the lidar elevation dataset as a 3D mesh using _As DEM_ method. 
-* In the __file __ menu select__import__ and find __Georeferenced raster__.
+
+* From  __file __ menu select__import__ and find __Georeferenced raster__.
 * On the bottom left side of the window find  __Mode__ and select __As DEM__.
 * For __Subdivision__ select  __Mesh__ and make sure that __CRS__ is set to NAD83(HARN)/North carolina.
 * Browse to the 'Geospatial Studio' folder and select 'elevation.tif'
+* If all the steps are followed correctly, you should be able to see the terrain in 3D view window. 
+* In _3D view_ __Right-click__ on the DEM object to select it , push __Alt+c__ and select __Mesh from Curve__ . Make sure the mouse cursor is in the _3D view_ area. This is step converts the imported raster to _Mesh_ object type to allow further modification.  
+
+*Trouble shooting: When importing your own raster data, you might encounter situations where the DEM is imported as a flat surface. Make sure that 1) you selected the _As DEM_ method 2) the raster resolution is not very coarse, 3) the data-type is float32 and 4) the coordinate system of the raster is matching the Blender Scenes' coordinate system. For more detailed instructions and troubleshooting read [georeference raster import](https://github.com/domlysz/BlenderGIS/wiki/Import-georef-raster) wiki .
+
 ####2.1. Vectors 
+*Note: When importing a shapefile it's necessary to specify the projection of the file
+Blender Addon reads into the attribute table of the shapefiles. This is helpful when you want to dismantle the shape files into discrete and uniquely named 3D objects. Also, the _z coordinate_ or _elevation_ attributes of the vectored can be used to extrude or define the hight of the 3D objects. In this tutorial,  we use two different shape-files to entertain these attributes. First, we will import the building shape file , and will assign the _height_ and the _name_ attribute to the corresponding 3D objects. Then, we will import the Lidar pointclouds for high vegetation (trees) using the _Z coordinate_ attribute. 
+
+__Buildings__
+
+* From  __file __ menu select__import__ and find __Shapefile(.shp)__.
+* Browse to 'Geospatial_studio\shp' , select 'building.shp' and click on __import SHP__ on top right of the window. You should be able to see the __import SHP parameters__ dialog on the left side of the screen.
+* Select __Elevation from the field__ and from the filed drop-down menu select _elevation_  
+* Select __Extrusion from the field__ and from the filed drop-down menu select _height_  
+*  Select __separate objects__ and __object name from the field__  , and from the filed drop-down menu select _building_  
+* The __CRS__ should be already set. If not, select NAD83(HARN)/North Carolina and click  __OK__.
+* You should be able to see and select buildings as separate objects on the terrain, right click on each building object and check its  name in the __outliner__ panel (top right) 
+
+__Tree point clouds__
+
+* From  __file __ menu select__import__ and find __Shapefile(.shp)__.
+* Browse to 'Geospatial_studio\shp' , select Lidarhighvegg.shp' and click on __import SHP__.
+* In the __import SHP parameters__ dialog, make sure that the correct CRS is indicated and click  __OK__.
+
+
+###2. Texture
+In this section we will drape _orthophoto_ as a texture on the terrain. You can apply textures to the 3D surfaces in blender using complex mapping methods (e.g. height mapping, bump mapping, normal mapping, displacement mapping, reflection mapping, specular mapping, mipmaps, occlusion mapping). However, [texture mapping](https://en.wikipedia.org/wiki/Texture_mapping) is beyond the scope of this tutorial. If you are interested to learn more about texture mapping and materials in blender, [Blender wikibooks](https://en.wikibooks.org/wiki/Blender_3D:_Noob_to_Pro/Materials_and_Textures) is a good place to start. 
+
+* From the top header select __Cycles Render__ as your rendering engine. <br> Note: Cycles is Blender’s ray-trace based production render engine. Discover more about cycles [here](https://www.blender.org/manual/render/cycles/introduction.html).
+* You can design workflows related to materials and textures in _Node editor_ environment. Change the bottom editor panel to __node editor__. This can be done by simply changing the _Editor Type selector_ button which is located at the left side of a header. Every area in Blender may contain any type of editor and it is also possible to open the same type multiple times. . Discover more about node editor [here](https://www.blender.org/manual/en/editors/node_editor/introduction.html).
+* From [3D view header](https://wiki.blender.org/index.php/User:Pepribal/Ref/3DView/Header)( bottom of the window) , find __Viewport shading__ button and select __Material__.
+*  In 3D view, right click on the DEM to select the object. 
+* From the [properties panel](https://en.wikibooks.org/wiki/Blender_3D:_Noob_to_Pro/Properties_Window)(you can find it below the _outliner_), goto __Material__  and from __Material browser select__ 'Ortho_texture'. Now you should be able to see the material workflow in node editor.
+*  On the left node , _image Texture_ , find __open image__ , and browse to the geospatial folder to 'select the Ortho.png'. Now you see the texture draped on the terrain. 
+
+###3. Trees
+
 
 
 
