@@ -18,7 +18,7 @@ __Exporting Raster__
 * Open GRASS GIS
 * Export rasters with Geotiff format containing the world file. For best compatibility, use float32 as datatype.
 
-Example for Lidar DEM:
+Snippet :<br>
 `r.out.gdal input=elev_cut@Dix_10_12 output=D:\Geospatial_studio\elevation.tif format=GTiff type=Float32 createopt=TFW=YES`
 
 __Exporting Vector__
@@ -26,7 +26,7 @@ __Exporting Vector__
 * Export vector data as ESRI shapefiles (.shp)
 *Note: When exporting the shape files preserve attributes such as unique object identifier or spatial information such as elevation or height.  
 
-Example for buildings vector:
+Snippet :<br>
 `v.out.ogr input=Buidlings@Dix_10_12 output=D:\Geospatial_studio\Buildings format=ESRI_Shapefile`
 
 ----------
@@ -91,8 +91,8 @@ __Tree point clouds__
 * Browse to 'Geospatial_studio\shp' , select Lidarhighvegg.shp' and click on __import SHP__.
 * In the __import SHP parameters__ dialog, make sure that the correct CRS is indicated and click  __OK__.
 
-
-###2. Texture
+----------
+###3. Texture
 In this section we will drape _orthophoto_ as a texture on the terrain. You can apply textures to the 3D surfaces in blender using complex mapping methods (e.g. height mapping, bump mapping, normal mapping, displacement mapping, reflection mapping, specular mapping, mipmaps, occlusion mapping). However, [texture mapping](https://en.wikipedia.org/wiki/Texture_mapping) is beyond the scope of this tutorial. If you are interested to learn more about texture mapping and materials in blender, [Blender wikibooks](https://en.wikibooks.org/wiki/Blender_3D:_Noob_to_Pro/Materials_and_Textures) is a good place to start. 
 
 * From the top header select __Cycles Render__ as your rendering engine. <br> Note: Cycles is Blender’s ray-trace based production render engine. Discover more about cycles [here](https://www.blender.org/manual/render/cycles/introduction.html).
@@ -102,7 +102,68 @@ In this section we will drape _orthophoto_ as a texture on the terrain. You can 
 * From the [properties panel](https://en.wikibooks.org/wiki/Blender_3D:_Noob_to_Pro/Properties_Window)(you can find it below the _outliner_), goto __Material__  and from __Material browser select__ 'Ortho_texture'. Now you should be able to see the material workflow in node editor.
 *  On the left node , _image Texture_ , find __open image__ , and browse to the geospatial folder to 'select the Ortho.png'. Now you see the texture draped on the terrain. 
 
-###3. Trees
+### 4. Trees
+In this step, we populate evergreen and deciduous trees on the terrain surface. There are many ways to do that in Blender.  The most efficient method is __Particle Systems Modifier_ which scatters a predefined duplicates of an objects (_particle_) on the surface of another object ( _Emitter_). The pattern through which the particles are scattered can be defined using _Vertex groups_,using which we simply define the vertices of the surface that should get populated. In this tutorial, the particle systems are already setup and ready to assign to the elevation surface , we will only go through creating the vertex groups.  You can setup your own particle system using the instructions provided [here](https://www.blender.org/manual/physics/particles/particle_system_panel.html?highlight=particle%20systems). 
+
+####4.1. Assigning vertex group
+
+* Right click on the terrain to select 'elevation' object. 
+* In __properties panel__ find __Data__ . In data panel expand __Vertex Groups__ and click on __+__ button to add new vertex groups. Add two new vertex groups and name them 'Evergreen' and 'Deciduous', respectively. Click on Evergreen to set as active vertex group. 
+* Now we select our desired vertices using __weight paint __ method 
+* In the bottom header of the 3D view, find and change the  __Object interaction mode__ to __weight paint__  (hotkey __ctrl+Tab__)
+* From the left toolbar change the weight to 1.00 
+* Using the tree point clouds as spatial reference, paint over the surface to delineate the dense forested patches. Use ( __ctrl+Tab__) to toggle back and forth between _object mode_ and _weight paint mode to see the ortho photo and get idea about the exact location of the patches. switch to object mode after painting is finished. 
+* Now select 'Deciduous' as active vertex group and repeat the process for the rest of the tress in the scene .  before 
+
+__`Python Console >>>`__
+
+_Clear existing vertex groups and add two new groups_
+`bpy.data.objects['elevation'].vertex_groups.clear()`
+`bpy.data.objects['elevation'].vertex_groups.new(name='Evergreen')`
+`bpy.data.objects['elevation'].vertex_groups.new(name='Deciduous')`
+`bpy.data.objects['elevation'].vertex_groups.active_index=0`
+_Toggle weight paint mode and assign weight_
+`bpy.ops.paint.weight_paint_toggle()`
+`bpy.context.scene.tool_settings.unified_paint_settings.weight = 1`
+
+####4.1. Setup particle systems
+
+* In the properties panel select __Modifiers__ tab. Then, click on the __Add Modifier__ drop down menu and select __particle system__.
+* Now expand the modifier (using the button on the right side) to see the modifier parameters. Browse __Setting__ to  
+
+__`Python Console >>>`__
+
+`DEM=bpy.data.objects['DEM']
+bpy.ops.object.particle_system_add()
+psys1 = DEM.particle_systems[-1]
+pset1 = psys1.settings
+pset1.name = 'Evergreen'
+pset1.use_dead=True
+pset1.frame_start = 1
+pset1.frame_end = 1
+pset1.lifetime = 50
+pset1.lifetime_random = 0.0
+pset1.emit_from = 'FACE'
+pset1.count=600
+pset1.use_render_emitter = True
+pset1.emit_from="FACE"
+pset1.use_emit_random=True
+pset1.userjit=70
+pset1.use_modifier_stack=True
+pset1.use_rotations=True
+pset1.render_type='OBJECT'
+pset1.dupli_object = bpy.data.objects["Evergreen"]
+pset1.use_rotation_dupli=True
+pset1.particle_size=.3
+pset1.size_random=.3
+pset1.rotation_mode='OB_Y'
+pset1.type = 'HAIR'
+psys1.vertex_group_density='Deciduous'`
+
+
+__Assigning vertex group__
+
+bpy.ops.object.particle_system_add()
 
 
 
