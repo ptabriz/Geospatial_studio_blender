@@ -1,8 +1,8 @@
 
 
-# The Geospatial_studio 
-**NOTE: This tutorial intends to provide basic steps for importing and processing Geospatial data in Blender using BlenderGIS Addon. For comprehensive review of the features and manual of the addon please visit [domlysz/BlenderGIS repository](https://github.com/domlysz/BlenderGIS). 
-## Pre-requisites
+# 3D Visualization of Geospatial Data with Blender
+**NOTE: This tutorial intends to provide basic steps for importing and processing Geospatial data in Blender using BlenderGIS Addon. For comprehensive review of the features and manual of the addon please visit domlysz/BlenderGIS [repository](https://github.com/domlysz/BlenderGIS). 
+### Pre-requisites
 1. Blender  [Latest Build](https://www.blender.org/download/)
 2. BlenderGIS [Add-on](https://github.com/domlysz/BlenderGIS) 
 3. [GRASS GIS](https://grass.osgeo.org/download/) or ARCGIS
@@ -44,7 +44,7 @@ __`Command Console >>>`__ <br>
 
 *Note: A much more comprehensive instruction on Georefencing management is available at BlenderGIS addon [gitub page](https://github.com/domlysz/BlenderGIS/wiki/Gereferencing-management).
 
-* Before setting up the coordinate reference system of the Blender scene and configuring the scene projection, you should know the Coordinate Reference System (CRS) and the Spatial Reference Identifier (SRID) of your project. In GRASS GIS, CRS information can be retrieved from  `v.info` or `r.info` . You get find the SRID from [http://epsg.io/](http://epsg.io/) or [spatial reference website ](http://spatialreference.org/) using your CRS. The example data sets in this exercise have a NAD83(HARN)/North Carolina CRS (SSRID ESPG: 3358).   
+* Before setting up the coordinate reference system of the Blender scene and configuring the scene projection, you should know the Coordinate Reference System (CRS) and the Spatial Reference Identifier (SRID) of your project. In GRASS GIS, CRS information can be retrieved using  `v.info` or `r.info` functions . You get find the SRID from [http://epsg.io/](http://epsg.io/) or [spatial reference website ](http://spatialreference.org/) using your CRS. The example data sets in this exercise have a NAD83(HARN)/North Carolina CRS (SSRID ESPG: 3358).   
 
 *  In BlenderGIS add-on section (in preferences windows), select to expand the __3D View: BlenderGIS__ . 
 *  In the preferences section find __Spatial Reference system__ and click on the __+ Add__ button. 
@@ -71,6 +71,8 @@ Rasters can be imported and used in different ways. You can import them _As DEM_
 
 *Trouble shooting: When importing your own raster data, you might encounter situations where the DEM is imported as a flat surface. Make sure that 1) you selected the _As DEM_ method 2) the raster resolution is not very coarse, 3) the data-type is float32 and 4) the coordinate system of the raster is matching the Blender Scenes' coordinate system. For more detailed instructions and troubleshooting read [georeference raster import](https://github.com/domlysz/BlenderGIS/wiki/Import-georef-raster) wiki .
 
+__`Python Console >>>`__
+>`bpy.ops.importgis.georaster(filepath="D:\Geospatial_studio\DEM.tif",importMode="DEM",subdivision="mesh")`<br>
 >`bpy.ops.object.convert(target='MESH')`
 
 ####2.1. Vectors 
@@ -80,21 +82,23 @@ Blender Addon reads into the attribute table of the shapefiles. This is helpful 
 __Buildings__
 
 * From  __file __ menu select__import__ and find __Shapefile(.shp)__.
-* Browse to 'Geospatial_studio\shp' , select 'building.shp' and click on __import SHP__ on top right of the window. You should be able to see the __import SHP parameters__ dialog on the left side of the screen.
+* Browse to 'Geospatial_studio\shp' , select 'Building.shp' and click on __import SHP__ on top right of the window. You should be able to see the __import SHP parameters__ dialog on the left side of the screen.
 * Select __Elevation from the field__ and from the filed drop-down menu select _elevation_  
 * Select __Extrusion from the field__ and from the filed drop-down menu select _height_  
 *  Select __separate objects__ and __object name from the field__  , and from the filed drop-down menu select _building_  
 * The __CRS__ should be already set. If not, select NAD83(HARN)/North Carolina and click  __OK__.
 * You should be able to see and select buildings as separate objects on the terrain, right click on each building object and check its  name in the __outliner__ panel (top right) 
+__`Python Console >>>`__
+>`bpy.ops.importgis.shapefile(filepath="D:/Geospatial_studio/shp/building.shp",fieldElevName="elevation",fieldExtrudeName="height",fieldObjName='Building',separateObjects=True,shpCRS=3358)`
 
-__Tree point clouds__
+__Lidar point clouds__
 
 * From  __file __ menu select__import__ and find __Shapefile(.shp)__.
-* Browse to 'Geospatial_studio\shp' , select Lidarhighvegg.shp' and click on __import SHP__.
+* Browse to 'Geospatial_studio\shp' , select 'Lidar_highveg.shp' and click on __import SHP__.
 * In the __import SHP parameters__ dialog, make sure that the correct CRS is indicated and click  __OK__.
 
 ----------
-###3. Texture
+###3. Materials and Texture
 In this section we will drape _orthophoto_ as a texture on the terrain. You can apply textures to the 3D surfaces in blender using complex mapping methods (e.g. height mapping, bump mapping, normal mapping, displacement mapping, reflection mapping, specular mapping, mipmaps, occlusion mapping). However, [texture mapping](https://en.wikipedia.org/wiki/Texture_mapping) is beyond the scope of this tutorial. If you are interested to learn more about texture mapping and materials in blender, [Blender wikibooks](https://en.wikibooks.org/wiki/Blender_3D:_Noob_to_Pro/Materials_and_Textures) is a good place to start. 
 
 * From the top header select __Cycles Render__ as your rendering engine. <br> Note: Cycles is Blender’s ray-trace based production render engine. Discover more about cycles [here](https://www.blender.org/manual/render/cycles/introduction.html).
@@ -102,9 +106,9 @@ In this section we will drape _orthophoto_ as a texture on the terrain. You can 
 * From [3D view header](https://wiki.blender.org/index.php/User:Pepribal/Ref/3DView/Header)( bottom of the window) , find __Viewport shading__ button and select __Material__.
 *  In 3D view, right click on the DEM to select the object. 
 * From the [properties panel](https://en.wikibooks.org/wiki/Blender_3D:_Noob_to_Pro/Properties_Window)(you can find it below the _outliner_), goto __Material__  and from __Material browser select__ 'Ortho_texture'. Now you should be able to see the material workflow in node editor.
-*  On the left node , _image Texture_ , find __open image__ , and browse to the geospatial folder to 'select the Ortho.png'. Now you see the texture draped on the terrain. 
+*  On the left node , _image Texture_ , find __open image__ , and browse to the geospatial folder to 'select the Ortho.png'. You should be able to see the texture draped on the terrain. 
 
-### 4. Trees
+### 4. Populating Trees
 In this step, we populate evergreen and deciduous trees on the terrain surface. There are many ways to do that in Blender.  The most efficient method is __Particle Systems Modifier_ which scatters a predefined duplicates of an objects (_particle_) on the surface of another object ( _Emitter_). The pattern through which the particles are scattered can be defined using _Vertex groups_,using which we simply define the vertices of the surface that should get populated. In this tutorial, the particle systems are already setup and ready to assign to the elevation surface , we will only go through creating the vertex groups.  You can setup your own particle system using the instructions provided [here](https://www.blender.org/manual/physics/particles/particle_system_panel.html?highlight=particle%20systems). 
 
 ####4.1. Assigning vertex group
