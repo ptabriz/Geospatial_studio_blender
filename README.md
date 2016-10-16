@@ -18,7 +18,7 @@ __Exporting Raster__
 * Open GRASS GIS
 * Export rasters with Geotiff format containing the world file. For best compatibility, use float32 as datatype.
 
-Snippet :<br>
+>__`Command Console >>>`__
 `r.out.gdal input=elev_cut@Dix_10_12 output=D:\Geospatial_studio\elevation.tif format=GTiff type=Float32 createopt=TFW=YES`
 
 __Exporting Vector__
@@ -26,7 +26,7 @@ __Exporting Vector__
 * Export vector data as ESRI shapefiles (.shp)
 *Note: When exporting the shape files preserve attributes such as unique object identifier or spatial information such as elevation or height.  
 
-Snippet :<br>
+>__`Command Console >>>`__
 `v.out.ogr input=Buidlings@Dix_10_12 output=D:\Geospatial_studio\Buildings format=ESRI_Shapefile`
 
 ----------
@@ -177,13 +177,13 @@ There two different ways to render scene in _Cycles render engine_. You can acti
 >######Change the 3D view shader to rendered
 `bpy.context.space_data.viewport_shade = 'RENDERED'`
 
->######Change the active camera to object 'Camera' and set 3D view window to camera . <br>Note: can be only executed from script.
+>######Change the active camera to object 'Camera' and set 3D view window to camera . <br> Note: can be only executed from script.
 >`cameraObj=bpy.data.objects['Camera']`
  `bpy.context.scene.objects.active = cameraObj`
 ` bpy.ops.view3d.object_as_camera() `
->#####Render
+>######Render directly to the file path 
+`bpy.context.scene.render.filepath = "D:\\Geospatial_studio\\Render\\"`
 >`bpy.ops.render.render() `
-
-
+>######Render both to the file and in the Viewport 
 
 
