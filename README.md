@@ -133,32 +133,32 @@ _Toggle weight paint mode and assign weight_
 
 __`Python Console >>>`__
 
->`DEM=bpy.data.objects['DEM'] <br />
-bpy.ops.object.particle_system_add() <br />
-psys1 = DEM.particle_systems[-1]<br />
-pset1 = psys1.settings<br />
-pset1.name = 'Evergreen'<br />
-pset1.use_dead=True<br />
-pset1.frame_start = 1<br />
-pset1.frame_end = 1<br />
-pset1.lifetime = 50<br />
-pset1.lifetime_random = 0.0<br />
-pset1.emit_from = 'FACE'<br />
-pset1.count=600<br />
-pset1.use_render_emitter = True<br />
-pset1.emit_from="FACE"<br />
-pset1.use_emit_random=True<br />
-pset1.userjit=70<br />
-pset1.use_modifier_stack=True<br />
-pset1.use_rotations=True<br />
-pset1.render_type='OBJECT'<br />
-pset1.dupli_object = bpy.data.objects["Evergreen"]<br />
-pset1.use_rotation_dupli=True<br />
-pset1.particle_size=.3<br />
-pset1.size_random=.3<br />
-pset1.rotation_mode='OB_Y'<br />
-pset1.type = 'HAIR'<br />
-psys1.vertex_group_density='Deciduous'`
+>`DEM=bpy.data.objects['DEM']`<br />
+`bpy.ops.object.particle_system_add() `<br />
+`psys1 = DEM.particle_systems[-1]`<br />
+`pset1 = psys1.settings`<br />
+`pset1.name = 'Evergreen'`<br />
+`pset1.use_dead=True`<br />
+`pset1.frame_start = 1`<br />
+`pset1.frame_end = 1`<br />
+`pset1.lifetime = 50`<br />
+`pset1.lifetime_random = 0.0`<br />
+`pset1.emit_from = 'FACE'`<br />
+`pset1.count=600`<br />
+`pset1.use_render_emitter = True`<br />
+`pset1.emit_from="FACE"`<br />
+`pset1.use_emit_random=True`<br />
+`pset1.userjit=70`<br />
+`pset1.use_modifier_stack=True`<br />
+`pset1.use_rotations=True`<br />
+`pset1.render_type='OBJECT'`<br />
+`pset1.dupli_object = bpy.data.objects["Evergreen"]`<br />
+`pset1.use_rotation_dupli=True`<br />
+`pset1.particle_size=.3`<br />
+`pset1.size_random=.3`<br />
+`pset1.rotation_mode='OB_Y'`<br />
+`pset1.type = 'HAIR'`<br />
+`psys1.vertex_group_density='Deciduous'`
 
 
 __Assigning vertex group__
