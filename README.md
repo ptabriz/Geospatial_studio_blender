@@ -117,12 +117,12 @@ In this step, we populate evergreen and deciduous trees on the terrain surface. 
 
 __`Python Console >>>`__
 
-_Clear existing vertex groups and add two new groups_
+>######Clear existing vertex groups and add two new groups
 `bpy.data.objects['elevation'].vertex_groups.clear()`
 `bpy.data.objects['elevation'].vertex_groups.new(name='Evergreen')`
 `bpy.data.objects['elevation'].vertex_groups.new(name='Deciduous')`
 `bpy.data.objects['elevation'].vertex_groups.active_index=0`
-_Toggle weight paint mode and assign weight_
+>######Toggle weight paint mode and assign weight_
 `bpy.ops.paint.weight_paint_toggle()`
 `bpy.context.scene.tool_settings.unified_paint_settings.weight = 1`
 
