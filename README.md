@@ -90,7 +90,7 @@ __Buildings__
 * You should be able to see and select buildings as separate objects on the terrain, right click on each building object and check its  name in the __outliner__ panel (top right).
 
 __`Python Console >>>`__<br />
->`bpy.ops.importgis.shapefile(filepath="D:/Geospatial_studio/shp/building.shp",fieldElevName="elevation",fieldExtrudeName="height",fieldObjName='Building',separateObjects=True,shpCRS=3358)`
+>`bpy.ops.importgis.shapefile(filepath="D:/Geospatial_studio/shp/building.shp",fieldElevName="elevation",fieldExtrudeName="height",fieldObjName='Building',separateObjects=True,shpCRS='epsg:3358')`
 
 __Lidar point clouds__
 
