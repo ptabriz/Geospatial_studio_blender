@@ -71,6 +71,8 @@ Rasters can be imported and used in different ways. You can import them _As DEM_
 
 *Trouble shooting: When importing your own raster data, you might encounter situations where the DEM is imported as a flat surface. Make sure that 1) you selected the _As DEM_ method 2) the raster resolution is not very coarse, 3) the data-type is float32 and 4) the coordinate system of the raster is matching the Blender Scenes' coordinate system. For more detailed instructions and troubleshooting read [georeference raster import](https://github.com/domlysz/BlenderGIS/wiki/Import-georef-raster) wiki .
 
+>`bpy.ops.object.convert(target='MESH')`
+
 ####2.1. Vectors 
 *Note: When importing a shapefile it's necessary to specify the projection of the file
 Blender Addon reads into the attribute table of the shapefiles. This is helpful when you want to dismantle the shape files into discrete and uniquely named 3D objects. Also, the _z coordinate_ or _elevation_ attributes of the vectored can be used to extrude or define the hight of the 3D objects. In this tutorial,  we use two different shape-files to entertain these attributes. First, we will import the building shape file , and will assign the _height_ and the _name_ attribute to the corresponding 3D objects. Then, we will import the Lidar pointclouds for high vegetation (trees) using the _Z coordinate_ attribute. 
@@ -117,19 +119,21 @@ In this step, we populate evergreen and deciduous trees on the terrain surface. 
 
 __`Python Console >>>`__
 
->######Clear existing vertex groups and add two new groups
+> ######Clear existing vertex groups and add two new groups
 `bpy.data.objects['elevation'].vertex_groups.clear()`
 `bpy.data.objects['elevation'].vertex_groups.new(name='Evergreen')`
 `bpy.data.objects['elevation'].vertex_groups.new(name='Deciduous')`
 `bpy.data.objects['elevation'].vertex_groups.active_index=0`
->######Toggle weight paint mode and assign weight_
+>######Toggle weight paint mode and assign weight
 `bpy.ops.paint.weight_paint_toggle()`
 `bpy.context.scene.tool_settings.unified_paint_settings.weight = 1`
 
 ####4.1. Setup particle systems
 
 * In the properties panel select __Modifiers__ tab. Then, click on the __Add Modifier__ drop down menu and select __particle system__.
-* Now expand the modifier (using the button on the right side) to see the modifier parameters. Browse __Setting__ to  
+* Now expand the modifier (using the button on the right side) to see the modifier parameters. Browse __Setting__ to find and select 'Evergreen'
+* Scroll down to find the __Vertex Groups__ tab and expand it to see the parameters. In __Density__ field find and select 'evergreen'. Now should be able to see the trees populated in the painted areas.
+* Repeat the same procedure for the 'Deciduous' vertex group , but this time select 'Deciduous' both in _particle setting_ and _Vertex group_ parameters.
 
 __`Python Console >>>`__
 
@@ -160,15 +164,25 @@ __`Python Console >>>`__
 `pset1.type = 'HAIR'`<br />
 `psys1.vertex_group_density='Deciduous'`
 
+### 5. Rendering
 
-__Assigning vertex group__
+There two different ways to render scene in _Cycles render engine_. You can activate _Real time-rendering_ that is useful for quick previews or GPU rendering for final output. Note that the GPU rendering is by default setup to render only active camera. 
 
-bpy.ops.object.particle_system_add()
+* In 3D_view bottom header find  __Shader option__ and select __Rendered__ . Interact with the 3D model to see how it is rendered on the-fly.
+* Set one of the windows (scripting or node editor) to camera view. This can be done by selecting 3D view from bottom header of the window.  Then select the desired camera by right-clicking on the camera object in 3D view or selecting the object name (e.g, camera) in _outliner_. Then, set the 3D view to camera using __NUM0__.
+* For final rendering push __F12__ after selecting the desired camera. For changing the render output and parameters, use the __Render__ tab in the __Properties__ panel. 
 
+>__`Python Console >>>`__
+>
+>######Change the 3D view shader to rendered
+`bpy.context.space_data.viewport_shade = 'RENDERED'`
 
-
-
-
+>######Change the active camera to object 'Camera' and set 3D view window to camera . <br>Note: can be only executed from script.
+>`cameraObj=bpy.data.objects['Camera']`
+ `bpy.context.scene.objects.active = cameraObj`
+` bpy.ops.view3d.object_as_camera() `
+>#####Render
+>`bpy.ops.render.render() `
 
 
 
