@@ -88,7 +88,7 @@ __Buildings__
 *  Select __separate objects__ and __object name from the field__  , and from the filed drop-down menu select _building_  
 * The __CRS__ should be already set. If not, select NAD83(HARN)/North Carolina and click  __OK__.
 * You should be able to see and select buildings as separate objects on the terrain, right click on each building object and check its  name in the __outliner__ panel (top right) 
-__`Python Console >>>`__
+__`Python Console >>>`__<br />
 >`bpy.ops.importgis.shapefile(filepath="D:/Geospatial_studio/shp/building.shp",fieldElevName="elevation",fieldExtrudeName="height",fieldObjName='Building',separateObjects=True,shpCRS=3358)`
 
 __Lidar point clouds__
