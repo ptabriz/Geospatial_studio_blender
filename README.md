@@ -6,27 +6,27 @@
 1. Blender  [Latest Build](https://www.blender.org/download/)
 2. BlenderGIS [Add-on](https://github.com/domlysz/BlenderGIS) 
 3. [GRASS GIS](https://grass.osgeo.org/download/) or ARCGIS
-4. [Download](./sample/) sample data folder
+4. Download [Repository](https://github.com/ptabriz/Geospatial_studio_blender).
 5. Laptop with Windows 7 or higher, Mac OS X or Linux
 
-### Exporting Geospatial data in GRASS GIS (optional)
+### 0. Exporting Geospatial data in GRASS GIS (optional)
 *Note: similar operations can be performed using ArcGIS. 
 For comprehensive tutorial on importing different data-types (e.g., Lidar, vectors and rasters) using GRASS GIS and ARCGIS see [Geospatial Modelling Module](http://ncsu-geoforall-lab.github.io/geospatial-modeling-course/grass/terrain_modeling.html).
    
-__Exporting Raster__
+####0. 1. Exporting Raster
 
 * Open GRASS GIS
 * Export rasters with Geotiff format containing the world file. For best compatibility, use float32 as datatype.
 
->__`Command Console >>>`__
+__`Command Console >>>`__
 `r.out.gdal input=elev_cut@Dix_10_12 output=D:\Geospatial_studio\elevation.tif format=GTiff type=Float32 createopt=TFW=YES`
 
-__Exporting Vector__
+####0. 2. Exporting Vector
 
 * Export vector data as ESRI shapefiles (.shp)
 *Note: When exporting the shape files preserve attributes such as unique object identifier or spatial information such as elevation or height.  
 
->__`Command Console >>>`__
+__`Command Console >>>`__
 `v.out.ogr input=Buidlings@Dix_10_12 output=D:\Geospatial_studio\Buildings format=ESRI_Shapefile`
 
 ----------
@@ -65,7 +65,7 @@ Rasters can be imported and used in different ways. You can import them _As DEM_
 * From  __file __ menu select__import__ and find __Georeferenced raster__.
 * On the bottom left side of the window find  __Mode__ and select __As DEM__.
 * For __Subdivision__ select  __Mesh__ and make sure that __CRS__ is set to NAD83(HARN)/North carolina.
-* Browse to the 'Geospatial Studio' folder and select 'elevation.tif'
+* Browse to the 'Geospatial Studio' folder and select 'DEM.tif'
 * If all the steps are followed correctly, you should be able to see the terrain in 3D view window. 
 * In _3D view_ __Right-click__ on the DEM object to select it , push __Alt+c__ and select __Mesh from Curve__ . Make sure the mouse cursor is in the _3D view_ area. This is step converts the imported raster to _Mesh_ object type to allow further modification.  
 
@@ -178,12 +178,12 @@ There two different ways to render scene in _Cycles render engine_. You can acti
 `bpy.context.space_data.viewport_shade = 'RENDERED'`
 
 >######Change the active camera to object 'Camera' and set 3D view window to camera . <br> Note: can be only executed from script.
->`cameraObj=bpy.data.objects['Camera']`
- `bpy.context.scene.objects.active = cameraObj`
+>`cameraObj=bpy.data.objects['Camera']`<br />
+ `bpy.context.scene.objects.active = cameraObj`<br />
 ` bpy.ops.view3d.object_as_camera() `
 >######Render directly to the file path 
-`bpy.context.scene.render.filepath = "D:\\Geospatial_studio\\Render\\"`
+`bpy.context.scene.render.filepath = "D:\\Geospatial_studio\\Render\\"` <br />
 >`bpy.ops.render.render() `
->######Render both to the file and in the Viewport 
+
 
 
