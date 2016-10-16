@@ -18,7 +18,7 @@ For comprehensive tutorial on importing different data-types (e.g., Lidar, vecto
 * Open GRASS GIS
 * Export rasters with Geotiff format containing the world file. For best compatibility, use float32 as datatype.
 
-__`Command Console >>>`__
+__`Command Console >>>`__<br>
 `r.out.gdal input=elev_cut@Dix_10_12 output=D:\Geospatial_studio\elevation.tif format=GTiff type=Float32 createopt=TFW=YES`
 
 ####0. 2. Exporting Vector
@@ -26,7 +26,7 @@ __`Command Console >>>`__
 * Export vector data as ESRI shapefiles (.shp)
 *Note: When exporting the shape files preserve attributes such as unique object identifier or spatial information such as elevation or height.  
 
-__`Command Console >>>`__
+__`Command Console >>>`__ <br>
 `v.out.ogr input=Buidlings@Dix_10_12 output=D:\Geospatial_studio\Buildings format=ESRI_Shapefile`
 
 ----------
