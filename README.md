@@ -1,13 +1,14 @@
 
 
 # 3D Visualization of Geospatial Data with Blender
-**Note: This tutorial intends to provide basic steps for importing and processing Geospatial data in Blender using BlenderGIS Addon. For comprehensive review of the features and manual of the addon please visit domlysz/BlenderGIS [repository](https://github.com/domlysz/BlenderGIS) 
+This tutorial intends to provide basic tips for importing and processing Geospatial data in [Blender](https://www.blender.org/) using [BlenderGIS Addon](https://github.com/domlysz/BlenderGIS). 
+
 ### Pre-requisites
 1. Blender  [Latest Build](https://www.blender.org/download/)
 2. BlenderGIS [Add-on](https://github.com/domlysz/BlenderGIS) 
-3. [GRASS GIS](https://grass.osgeo.org/download/) or ARCGIS
-4. Download [Repository](https://github.com/ptabriz/Geospatial_studio_blender)
-5. Laptop with Windows 7 or higher, Mac OS X or Linux
+3. Download [Repository](https://github.com/ptabriz/Geospatial_studio_blender)
+4. Laptop with Windows 7 or higher, Mac OS X or Linux
+5. [GRASS GIS](https://grass.osgeo.org/download/), ARCGIS or any GIS platform (optional).
 
 ### 0. Exporting Geospatial data in GRASS GIS (optional)
 **Note: similar operations can be performed using ArcGIS. 
@@ -191,6 +192,9 @@ There two different ways to render scene in _Cycles render engine_. You can acti
 >######Render directly to the file path 
 `bpy.context.scene.render.filepath = "D:\\Geospatial_studio\\Render\\"` <br />
 >`bpy.ops.render.render() `
+
+### 6. Acknowledgment
+This work is built upon great contributions and support of [Blender](https://www.blender.org/) team, Blender GIS addon developers [(domlysz/BlenderGIS)](https://github.com/domlysz/BlenderGIS) , Center for [Geospatial Analytics](https://cnr.ncsu.edu/geospatial/) and [Vaclav Petras](https://github.com/wenzeslaus).
 
 
 
