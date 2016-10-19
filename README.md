@@ -72,7 +72,7 @@ Rasters can be imported and used in different ways. You can import them _As DEM_
 *Trouble shooting: When importing your own raster data, you might encounter situations where the DEM is imported as a flat surface. Make sure that 1) you selected the _As DEM_ method 2) the raster resolution is not very low, 3) the data-type is float32, and 4) the coordinate system of the raster is matching the Blender Scenes' coordinate system. For more detailed instructions and troubleshooting read [georeference raster import](https://github.com/domlysz/BlenderGIS/wiki/Import-georef-raster) wiki .
 
 __`Python Console >>>`__
->`bpy.ops.importgis.georaster(filepath="D:\Geospatial_studio\DEM.tif",importMode="DEM",subdivision="mesh", )`<br>
+>`bpy.ops.importgis.georaster(filepath="D:\Geospatial_studio\DEM.tif",importMode="DEM",subdivision="mesh",rastCRS="EPSG:3358")`<br>
 >`bpy.ops.object.convert(target='MESH')`
 
 ####2.1. Vectors 
@@ -189,8 +189,12 @@ There two different ways to render scene in _Cycles render engine_. You can acti
  `bpy.context.scene.objects.active = cameraObj`<br />
 ` bpy.ops.view3d.object_as_camera() `
 >######Render directly to the file path 
-`bpy.context.scene.render.filepath = "D:\\Geospatial_studio\\Render\\"` <br />
+`bpy.context.scene.render.filepath = "D:\\Geospatial_studio\\Render\\t_"` <br />
 >`bpy.ops.render.render() `
+>######Render in background using windows run command <br />
+>`../blender-2.77a-windows32/blender.exe d:/test/test.blend --render-output d:/test/t_ --engine CYCLES --render-format PNG --use-extension 1 --render-frame 1`
+
+
 
 ### 6. Acknowledgment
 This work is built upon great contributions and support of [Blender](https://www.blender.org/) team, Blender GIS addon developers [(domlysz/BlenderGIS)](https://github.com/domlysz/BlenderGIS) , Center for [Geospatial Analytics](https://cnr.ncsu.edu/geospatial/) and [Vaclav Petras](https://github.com/wenzeslaus).
