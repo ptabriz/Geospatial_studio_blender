@@ -43,14 +43,13 @@ __`Command Console >>>`__ <br>
  
 ####1. 2. Adding a new predefined coordinate reference system (CRS)
 
-**Note: A much more comprehensive instruction on Georefencing management is available at BlenderGIS addon [gitub page](https://github.com/domlysz/BlenderGIS/wiki/Gereferencing-management)
-
-* Before setting up the coordinate reference system of the Blender scene and configuring the scene projection, you should know the Coordinate Reference System (CRS) and the Spatial Reference Identifier (SRID) of your project. In GRASS GIS, CRS information can be retrieved using  `v.info` or `r.info` functions . You get find the SRID from [http://epsg.io/](http://epsg.io/) or [spatial reference website ](http://spatialreference.org/) using your CRS. The example data sets in this exercise have a NAD83(HARN)/North Carolina CRS (SSRID ESPG: 3358)   
+* Before setting up the coordinate reference system of the Blender scene and configuring the scene projection, you should know the Coordinate Reference System (CRS) and the Spatial Reference Identifier (SRID) of your project. In GRASS GIS, CRS information can be retrieved using  `v.info` or `r.info` functions . You can get the SRID from [http://epsg.io/](http://epsg.io/) or [spatial reference website ](http://spatialreference.org/) using your CRS. The example datasets in this exercise uses a NAD83(HARN)/North Carolina CRS (SSRID ESPG: 3358)   
 
 *  In BlenderGIS add-on section (in preferences windows), select to expand the __3D View: BlenderGIS__  
 *  In the preferences section find __Spatial Reference system__ and click on the __+ Add__ button 
 *  In the add window put  'ESPG: 3358'  for __definition__ and 'NAD83(HARN)/North Carolina' for __Description__. Then select __Save to addon preferences__
 
+**Note: For a more comprehensive instruction on Georefencing management visit BlenderGIS addon [wiki page](https://github.com/domlysz/BlenderGIS/wiki/Gereferencing-management)
 
 ####1. 3. Opening the blender file and setting the Coordinate system
 * From the __file__ menu, select __open__  , browse to find the downloaded 'Geospatial_studio' folder and open the 'studio.blend' file
@@ -70,7 +69,7 @@ Rasters can be imported and used in different ways. You can import them _As DEM_
 * If all the steps are followed correctly, you should be able to see the terrain in 3D view window 
 * In _3D view_ __Right-click__ on the DEM object to select it , push __Alt+c__ and select __Mesh from Curve__ .Make sure the mouse cursor is in the _3D view_ area. This is step converts the imported raster to _Mesh_ object type to allow further modification  
 
-*Trouble shooting: When importing your own raster data, you might encounter situations where the DEM is imported as a flat surface. Make sure that 1) you selected the _As DEM_ method 2) the raster resolution is not very coarse, 3) the data-type is float32 and 4) the coordinate system of the raster is matching the Blender Scenes' coordinate system. For more detailed instructions and troubleshooting read [georeference raster import](https://github.com/domlysz/BlenderGIS/wiki/Import-georef-raster) wiki .
+*Trouble shooting: When importing your own raster data, you might encounter situations where the DEM is imported as a flat surface. Make sure that 1) you selected the _As DEM_ method 2) the raster resolution is not very low, 3) the data-type is float32, and 4) the coordinate system of the raster is matching the Blender Scenes' coordinate system. For more detailed instructions and troubleshooting read [georeference raster import](https://github.com/domlysz/BlenderGIS/wiki/Import-georef-raster) wiki .
 
 __`Python Console >>>`__
 >`bpy.ops.importgis.georaster(filepath="D:\Geospatial_studio\DEM.tif",importMode="DEM",subdivision="mesh", )`<br>
