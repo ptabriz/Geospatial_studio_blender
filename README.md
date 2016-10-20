@@ -47,7 +47,7 @@ __`Command Console >>>`__ <br>
 
 *  In BlenderGIS add-on section (in preferences windows), select to expand the __3D View: BlenderGIS__  
 *  In the preferences section find __Spatial Reference system__ and click on the __+ Add__ button 
-*  In the add window put  'ESPG: 3358'  for __definition__ and 'NAD83(HARN)/North Carolina' for __Description__. Then select __Save to addon preferences__
+*  In the add window put  'EPSG: 3358'  for __definition__ and 'NAD83(HARN)/North Carolina' for __Description__. Then select __Save to addon preferences__
 
 **Note: For a more comprehensive instruction on Georefencing management visit BlenderGIS addon [wiki page](https://github.com/domlysz/BlenderGIS/wiki/Gereferencing-management)
 
